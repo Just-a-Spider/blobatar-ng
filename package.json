@@ -1,0 +1,39 @@
+{
+  "name": "@just-a-spider/blobatar-ng",
+  "version": "0.1.0",
+  "description": "Angular adapter for blobatar — deterministic geometric avatars with signals, animations, and gaze tracking.",
+  "keywords": [
+    "blobatar",
+    "avatar",
+    "identicon",
+    "angular",
+    "svg",
+    "signals",
+    "deterministic"
+  ],
+  "author": "Andre (Just-a-Spider)",
+  "license": "MIT",
+  "homepage": "https://github.com/Just-a-Spider/blobatar-ng#readme",
+  "bugs": {
+    "url": "https://github.com/Just-a-Spider/blobatar-ng/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Just-a-Spider/blobatar-ng.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=17.3.0",
+    "@angular/core": ">=17.3.0",
+    "@angular/platform-browser": ">=17.3.0",
+    "blobatar": "^2.7.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}
