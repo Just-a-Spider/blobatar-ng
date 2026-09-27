@@ -1,6 +1,6 @@
 {
   "name": "@just-a-spider/blobatar-ng",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Angular adapter for blobatar — deterministic geometric avatars with signals, animations, and gaze tracking.",
   "keywords": [
     "blobatar",
@@ -32,10 +32,10 @@
   "peerDependencies": {
     "@angular/common": ">=17.3.0",
     "@angular/core": ">=17.3.0",
-    "@angular/platform-browser": ">=17.3.0",
-    "blobatar": "^2.7.0"
+    "@angular/platform-browser": ">=17.3.0"
   },
   "dependencies": {
+    "blobatar": "^2.7.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
