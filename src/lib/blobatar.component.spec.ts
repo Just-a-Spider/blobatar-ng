@@ -158,4 +158,77 @@ describe('BlobatarComponent', () => {
     const bgPath = host.querySelector('svg path');
     expect(bgPath?.getAttribute('fill')).toBe('#10b981');
   });
+
+  it('should not attach animation classes or wrappers when animate is false and expression is active', () => {
+    fixture.componentRef.setInput('name', 'still-expressive');
+    fixture.componentRef.setInput('expression', 'happy');
+    fixture.componentRef.setInput('animate', false);
+    fixture.detectChanges();
+
+    const host = fixture.nativeElement as HTMLElement;
+    const svg = host.querySelector('svg');
+    expect(svg).toBeTruthy();
+
+    const innerG = svg?.querySelector('g');
+    expect(innerG?.classList.contains('mo-always')).toBe(false);
+    expect(innerG?.classList.contains('mo-root')).toBe(false);
+    expect(svg?.querySelector('.mo-breathe')).toBeNull();
+    expect(svg?.querySelector('.mo-bob')).toBeNull();
+    expect(svg?.classList.contains('blobatar-animated')).toBe(false);
+  });
+
+  it('should attach mo-always and animation wrappers when animate is true', () => {
+    fixture.componentRef.setInput('name', 'lively-expressive');
+    fixture.componentRef.setInput('expression', 'happy');
+    fixture.componentRef.setInput('animate', true);
+    fixture.detectChanges();
+
+    const host = fixture.nativeElement as HTMLElement;
+    const svg = host.querySelector('svg');
+    expect(svg).toBeTruthy();
+
+    const innerG = svg?.querySelector('g');
+    expect(innerG?.classList.contains('mo-always')).toBe(true);
+    expect(innerG?.classList.contains('mo-root')).toBe(true);
+    expect(svg?.querySelector('.mo-breathe')).toBeTruthy();
+    expect(svg?.querySelector('.mo-bob')).toBeTruthy();
+    expect(svg?.classList.contains('blobatar-animated')).toBe(true);
+  });
+
+  it('should dynamically toggle animation classes when animate changes from true to false', () => {
+    fixture.componentRef.setInput('name', 'toggle-test');
+    fixture.componentRef.setInput('expression', 'wink');
+    fixture.componentRef.setInput('animate', true);
+    fixture.detectChanges();
+
+    const host = fixture.nativeElement as HTMLElement;
+    let svg = host.querySelector('svg');
+    expect(svg?.querySelector('.mo-breathe')).toBeTruthy();
+
+    // Toggle animation off
+    fixture.componentRef.setInput('animate', false);
+    fixture.detectChanges();
+
+    svg = host.querySelector('svg');
+    expect(svg?.querySelector('.mo-breathe')).toBeNull();
+    expect(svg?.querySelector('.mo-bob')).toBeNull();
+    const innerG = svg?.querySelector('g');
+    expect(innerG?.classList.contains('mo-always')).toBe(false);
+  });
+
+  it('should support hover animation mode with mo-root and without mo-always', () => {
+    fixture.componentRef.setInput('name', 'hover-user');
+    fixture.componentRef.setInput('expression', 'happy');
+    fixture.componentRef.setInput('animate', 'hover');
+    fixture.detectChanges();
+
+    const host = fixture.nativeElement as HTMLElement;
+    const svg = host.querySelector('svg');
+    expect(svg).toBeTruthy();
+
+    const innerG = svg?.querySelector('g');
+    expect(innerG?.classList.contains('mo-root')).toBe(true);
+    expect(innerG?.classList.contains('mo-always')).toBe(false);
+    expect(svg?.classList.contains('blobatar-animated')).toBe(true);
+  });
 });
